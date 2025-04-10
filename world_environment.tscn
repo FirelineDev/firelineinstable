@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj02lpws40xsc"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ib8r2"]
+
+[sub_resource type="Sky" id="Sky_3dvi0"]
+sky_material = SubResource("PanoramaSkyMaterial_ib8r2")
+
+[sub_resource type="Environment" id="Environment_tqbx3"]
+background_mode = 2
+sky = SubResource("Sky_3dvi0")
+ambient_light_source = 3
+ambient_light_color = Color(0.78293, 0.719571, 0.681593, 1)
+ssr_fade_in = 0.344609
+ssr_fade_out = 0.812253
+ssao_enabled = true
+ssao_radius = 0.01
+ssao_power = 1.09806
+ssao_detail = 1.29
+ssil_radius = 9.38
+ssil_intensity = 2.85
+fog_light_color = Color(0.59862, 0.526062, 0.4162, 1)
+fog_light_energy = 0.66
+fog_sun_scatter = 0.29
+fog_density = 0.1896
+fog_aerial_perspective = 0.326
+fog_sky_affect = 0.332
+fog_height = -43.12
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_tqbx3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.583725, -0.739132, 0.336079, 0, 0.413915, 0.910316, -0.811951, -0.531374, 0.241613, 3.95424, 11.037, -1.30858)
+shadow_enabled = true
+shadow_bias = 1.0

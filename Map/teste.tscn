@@ -1,0 +1,101 @@
+[gd_scene load_steps=13 format=3 uid="uid://nowhtx116hai"]
+
+[ext_resource type="PackedScene" uid="uid://b3gqlatgh0wxt" path="res://Map/Casas/casacommurov4.glb" id="4_5mlvc"]
+[ext_resource type="PackedScene" uid="uid://birq65b0tyv5x" path="res://Map/Casas/Bebedouro (1).glb" id="5_8p7wd"]
+[ext_resource type="PackedScene" uid="uid://dihlnfvt7ob5e" path="res://PLAYER/player.tscn" id="5_ielcd"]
+[ext_resource type="PackedScene" uid="uid://cjuptnbdxfg4j" path="res://Map/Casas/Mesa madeirada (1).glb" id="6_ielcd"]
+[ext_resource type="Script" uid="uid://8yppa6llmns5" path="res://PLAYER/player.gd" id="6_mo1yv"]
+
+[sub_resource type="Gradient" id="Gradient_8p7wd"]
+offsets = PackedFloat32Array(0.2, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ielcd"]
+noise_type = 2
+frequency = 0.03
+cellular_jitter = 3.0
+cellular_return_type = 0
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 50.0
+domain_warp_fractal_type = 2
+domain_warp_fractal_lacunarity = 1.5
+domain_warp_fractal_gain = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mo1yv"]
+seamless = true
+color_ramp = SubResource("Gradient_8p7wd")
+noise = SubResource("FastNoiseLite_ielcd")
+
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_2rca3"]
+_shader_parameters = {
+&"bias_distance": 512.0,
+&"blend_sharpness": 0.87,
+&"depth_blur": 0.0,
+&"enable_macro_variation": true,
+&"enable_projection": true,
+&"height_blending": true,
+&"macro_variation1": Color(1, 1, 1, 1),
+&"macro_variation2": Color(1, 1, 1, 1),
+&"macro_variation_slope": 0.333,
+&"mipmap_bias": 1.0,
+&"noise1_angle": 0.0,
+&"noise1_offset": Vector2(0.5, 0.5),
+&"noise1_scale": 0.04,
+&"noise2_scale": 0.076,
+&"noise3_scale": 0.225,
+&"noise_texture": SubResource("NoiseTexture2D_mo1yv"),
+&"projection_angular_division": 2.0,
+&"projection_threshold": 0.8,
+&"world_space_normal_blend": true
+}
+show_checkered = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2pd1v"]
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.5, 0.5, 0.5, 1)
+distance_fade_mode = 1
+distance_fade_min_distance = 128.0
+distance_fade_max_distance = 96.0
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_x4cs8"]
+generated_type = 1
+height_offset = 0.5
+material_override = SubResource("StandardMaterial3D_2pd1v")
+last_lod = 0
+last_shadow_lod = 0
+lod0_range = 128.0
+
+[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_jacck"]
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_x4cs8")])
+
+[node name="Node3D" type="Node3D"]
+
+[node name="casacommurov4" parent="." instance=ExtResource("4_5mlvc")]
+transform = Transform3D(0.00648053, 0, -0.379961, 0, 0.32459, 0, 0.438869, 0, 0.00561072, 116.126, -0.244255, -16.5282)
+
+[node name="Bebedouro (1)" parent="." instance=ExtResource("5_8p7wd")]
+transform = Transform3D(0.00424284, 0, 0.102117, 0, 0.0949573, 0, 0.0839005, 0, -0.00516408, 116.204, 0.920041, -10.8587)
+
+[node name="Mesa madeirada (1)" parent="." instance=ExtResource("6_ielcd")]
+transform = Transform3D(-0.0186999, 0, 0.0829745, 0, 0.0769393, 0, -0.0976024, 0, -0.0158973, 116.037, 0.0506263, -10.1035)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.911573, -0.370413, 0.178408, -0.0422732, 0.51608, 0.855497, -0.40896, 0.772306, -0.486103, 0, 15, 0)
+shadow_enabled = true
+
+[node name="Terrain3D" type="Terrain3D" parent="."]
+data_directory = "res://Map/data"
+material = SubResource("Terrain3DMaterial_2rca3")
+assets = SubResource("Terrain3DAssets_jacck")
+show_checkered = true
+top_level = true
+metadata/_edit_lock_ = true
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("5_ielcd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 119.986, 1.20587, 9.21993)
+disable_mode = 1
+script = ExtResource("6_mo1yv")
