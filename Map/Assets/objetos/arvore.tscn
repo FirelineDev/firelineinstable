@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2pdmjnbagmv4"]
+
+[ext_resource type="ArrayMesh" uid="uid://tglmibnmwqy4" path="res://Map/Assets/objetos/Tree.obj" id="1_ujppd"]
+[ext_resource type="Texture2D" uid="uid://cfh8fqc135ah" path="res://Map/Assets/objetos/bark_0021.jpg" id="2_es88o"]
+[ext_resource type="Texture2D" uid="uid://b0mxgxfg5v3o0" path="res://Map/Assets/objetos/DB2X2_L01.png" id="3_t31g1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3waco"]
+albedo_texture = ExtResource("2_es88o")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xptc0"]
+transparency = 1
+albedo_texture = ExtResource("3_t31g1")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Tree" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.060973, 0, -0.0387404)
+mesh = ExtResource("1_ujppd")
+surface_material_override/0 = SubResource("StandardMaterial3D_3waco")
+surface_material_override/1 = SubResource("StandardMaterial3D_xptc0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Tree"]

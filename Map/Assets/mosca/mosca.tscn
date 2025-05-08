@@ -1,0 +1,161 @@
+[gd_scene load_steps=21 format=3 uid="uid://bjywkew53cfeq"]
+
+[ext_resource type="Texture2D" uid="uid://d3uspco1kvfsf" path="res://Map/Assets/mosca/mos-removebg-preview.png" id="1_grpmc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8rhl"]
+atlas = ExtResource("1_grpmc")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1icw1"]
+atlas = ExtResource("1_grpmc")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmy6l"]
+atlas = ExtResource("1_grpmc")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61qar"]
+atlas = ExtResource("1_grpmc")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rlujq"]
+atlas = ExtResource("1_grpmc")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4qnf"]
+atlas = ExtResource("1_grpmc")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_leje2"]
+atlas = ExtResource("1_grpmc")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlpx6"]
+atlas = ExtResource("1_grpmc")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34kny"]
+atlas = ExtResource("1_grpmc")
+region = Rect2(200, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6msn"]
+atlas = ExtResource("1_grpmc")
+region = Rect2(300, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gw4r8"]
+atlas = ExtResource("1_grpmc")
+region = Rect2(400, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ua8ht"]
+atlas = ExtResource("1_grpmc")
+region = Rect2(500, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_du6kv"]
+atlas = ExtResource("1_grpmc")
+region = Rect2(0, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cb867"]
+atlas = ExtResource("1_grpmc")
+region = Rect2(100, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxra4"]
+atlas = ExtResource("1_grpmc")
+region = Rect2(200, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7qxv"]
+atlas = ExtResource("1_grpmc")
+region = Rect2(300, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkv1l"]
+atlas = ExtResource("1_grpmc")
+region = Rect2(400, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdvmv"]
+atlas = ExtResource("1_grpmc")
+region = Rect2(500, 200, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cjdk6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8rhl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1icw1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmy6l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61qar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rlujq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4qnf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_leje2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlpx6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34kny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6msn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gw4r8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ua8ht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_du6kv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cb867")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxra4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7qxv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkv1l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdvmv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.114462, 0, 0)
+sprite_frames = SubResource("SpriteFrames_cjdk6")
+autoplay = "default"
+frame_progress = 0.0855345
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="AnimatedSprite3D"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.804344, -0.382307, 0)
+sprite_frames = SubResource("SpriteFrames_cjdk6")
+autoplay = "default"
+frame_progress = 0.904797
+
+[node name="AnimatedSprite3D2" type="AnimatedSprite3D" parent="AnimatedSprite3D"]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, 0.325631, 0.463295, 0)
+sprite_frames = SubResource("SpriteFrames_cjdk6")
+autoplay = "default"
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="AnimatedSprite3D/AnimatedSprite3D2"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.804344, -0.382307, 0)
+sprite_frames = SubResource("SpriteFrames_cjdk6")
+autoplay = "default"
