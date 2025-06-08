@@ -1,0 +1,202 @@
+[gd_scene load_steps=19 format=3 uid="uid://csmgpvfd421rx"]
+
+[ext_resource type="Script" uid="uid://8yppa6llmns5" path="res://PLAYER/player.gd" id="1_6i24g"]
+[ext_resource type="Texture2D" uid="uid://bml44m2htu3pu" path="res://PLAYER/rasteira-removebg-preview.png" id="1_xmmt6"]
+[ext_resource type="Script" uid="uid://b822vpdfl8shh" path="res://PLAYER/interact_ray.gd" id="2_gvfuq"]
+[ext_resource type="Texture2D" uid="uid://cla2ywkqhjm27" path="res://PLAYER/chute.png" id="3_gvfuq"]
+[ext_resource type="Script" uid="uid://bj12kpaxlgxql" path="res://PLAYER/reticle.gd" id="4_bql2f"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xmmt6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmmt6"]
+atlas = ExtResource("1_xmmt6")
+region = Rect2(0, 201, 200, 199)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2kxjs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmmt6")
+}],
+"loop": true,
+"name": &"slide",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lviht"]
+atlas = ExtResource("3_gvfuq")
+region = Rect2(0, 1260, 471, 630)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tskjp"]
+atlas = ExtResource("3_gvfuq")
+region = Rect2(0, 0, 471, 630)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nugwi"]
+atlas = ExtResource("3_gvfuq")
+region = Rect2(471, 0, 471, 630)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_py76g"]
+atlas = ExtResource("3_gvfuq")
+region = Rect2(942, 0, 471, 630)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skiy3"]
+atlas = ExtResource("3_gvfuq")
+region = Rect2(0, 630, 471, 630)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0lhq"]
+atlas = ExtResource("3_gvfuq")
+region = Rect2(471, 630, 471, 630)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tb5si"]
+atlas = ExtResource("3_gvfuq")
+region = Rect2(942, 630, 471, 630)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqwsn"]
+atlas = ExtResource("3_gvfuq")
+region = Rect2(471, 1260, 471, 630)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m324a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lviht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tskjp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nugwi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_py76g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skiy3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0lhq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tb5si")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqwsn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Theme" id="Theme_gvfuq"]
+
+[node name="CharacterBody3D2" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1_6i24g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0083, 0)
+shape = SubResource("CapsuleShape3D_xmmt6")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.125252)
+
+[node name="Reach" type="RayCast3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00250174)
+target_position = Vector3(0, 0, -2)
+script = ExtResource("2_gvfuq")
+
+[node name="head_ray_cast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.019407, -0.999812, 0, 0.999812, 0.019407, 0, 1.97601, 0)
+target_position = Vector3(0, 0, -10000)
+collide_with_bodies = false
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(0.910311, -0.401982, 0.0987118, 0.0838994, -0.0543378, -0.994991, 0.405332, 0.914034, -0.0157383, 0, 1.97601, 0)
+target_position = Vector3(0, 0, -10000)
+collide_with_bodies = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Animation" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="slide" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
+position = Vector2(-58, 183)
+scale = Vector2(3.92345, 2.80841)
+sprite_frames = SubResource("SpriteFrames_2kxjs")
+animation = &"slide"
+autoplay = "slide"
+frame_progress = 0.155067
+
+[node name="chute" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
+position = Vector2(78, 28)
+sprite_frames = SubResource("SpriteFrames_m324a")
+frame_progress = 0.796463
+
+[node name="reticle" type="CenterContainer" parent="CanvasLayer/Animation"]
+layout_mode = 1
+offset_left = -19.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+script = ExtResource("4_bql2f")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -6.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="GunPanel" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/GunPanel"]
+layout_mode = 0
+offset_left = 276.0
+offset_top = 301.0
+offset_right = 385.0
+offset_bottom = 417.0
+theme = SubResource("Theme_gvfuq")
+
+[node name="PickupPanel" type="Panel" parent="CanvasLayer/GunPanel"]
+layout_mode = 0
+offset_left = 281.0
+offset_top = 305.0
+offset_right = 379.0
+offset_bottom = 412.0
+
+[node name="Label" type="Label" parent="CanvasLayer/GunPanel/PickupPanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 104.0
+offset_bottom = 73.0
+text = "APERTA [E]
+VIADO"
+
+[node name="Shootsound" type="AudioStreamPlayer" parent="."]
+
+[node name="item" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.221015, 1.26918, -0.795439)

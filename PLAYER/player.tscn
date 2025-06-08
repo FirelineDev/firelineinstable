@@ -1,27 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://dihlnfvt7ob5e"]
+[gd_scene load_steps=17 format=3 uid="uid://csmgpvfd421rx"]
 
 [ext_resource type="Script" uid="uid://8yppa6llmns5" path="res://PLAYER/player.gd" id="1_6i24g"]
 [ext_resource type="Texture2D" uid="uid://bml44m2htu3pu" path="res://PLAYER/rasteira-removebg-preview.png" id="1_xmmt6"]
-[ext_resource type="Script" uid="uid://b822vpdfl8shh" path="res://PLAYER/interact_ray.gd" id="2_gvfuq"]
 [ext_resource type="Texture2D" uid="uid://cla2ywkqhjm27" path="res://PLAYER/chute.png" id="3_gvfuq"]
 [ext_resource type="Script" uid="uid://bj12kpaxlgxql" path="res://PLAYER/reticle.gd" id="4_bql2f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xmmt6"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xmmt6"]
-atlas = ExtResource("1_xmmt6")
-region = Rect2(0, 201, 200, 199)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_2kxjs"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xmmt6")
-}],
-"loop": true,
-"name": &"slide",
-"speed": 5.0
-}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lviht"]
 atlas = ExtResource("3_gvfuq")
@@ -87,32 +71,49 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="CharacterBody3D" type="CharacterBody3D" groups=["player"]]
-collision_layer = 2
-collision_mask = 3
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmmt6"]
+atlas = ExtResource("1_xmmt6")
+region = Rect2(0, 201, 200, 199)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2kxjs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmmt6")
+}],
+"loop": true,
+"name": &"slide",
+"speed": 5.0
+}]
+
+[node name="CharacterBody3D2" type="CharacterBody3D"]
+collision_layer = 9
 script = ExtResource("1_6i24g")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76512, 0)
+target_position = Vector3(0, 1, 0)
+
+[node name="head_ray_cast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80864, 0)
+target_position = Vector3(0, 1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0083, 0)
 shape = SubResource("CapsuleShape3D_xmmt6")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="head" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.125252)
 
-[node name="interactRay" type="RayCast3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 0.999999, -0.00139618, 0, 0.00139618, 0.999999, 0, 0.00621557, 0.125252)
-target_position = Vector3(0, 0, -10000)
-script = ExtResource("2_gvfuq")
+[node name="InteractRay" type="RayCast3D" parent="head/Camera3D" groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00250174)
+target_position = Vector3(0, 0, -2.5)
+collision_mask = 8
+collide_with_areas = true
 
-[node name="head_ray_cast" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.019407, -0.999812, 0, 0.999812, 0.019407, 0, 1.97601, 0)
-target_position = Vector3(0, 0, -10000)
-collide_with_bodies = false
-
-[node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(0.910311, -0.401982, 0.0987118, 0.0838994, -0.0543378, -0.994991, 0.405332, 0.914034, -0.0157383, 0, 1.97601, 0)
-target_position = Vector3(0, 0, -10000)
-collide_with_bodies = false
+[node name="Hand" type="Node3D" parent="head/Camera3D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -131,77 +132,28 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="slide" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
-position = Vector2(-58, 183)
-scale = Vector2(3.92345, 2.80841)
-sprite_frames = SubResource("SpriteFrames_2kxjs")
-animation = &"slide"
-autoplay = "slide"
-frame_progress = 0.155067
-
 [node name="chute" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
+visible = false
 position = Vector2(78, 28)
 sprite_frames = SubResource("SpriteFrames_m324a")
 frame_progress = 0.796463
 
 [node name="reticle" type="CenterContainer" parent="CanvasLayer/Animation"]
 layout_mode = 1
-offset_left = -20.0
+offset_left = -19.0
 offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 script = ExtResource("4_bql2f")
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -6.0
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 1, 1, 0)
-
-[node name="Interaction" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = -35.0
-offset_right = -80.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Panel" type="Panel" parent="CanvasLayer/Interaction"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -139.0
-offset_top = -108.0
-offset_right = 139.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/Interaction/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -87.0
-offset_right = 87.0
-offset_bottom = 23.0
-grow_horizontal = 2
-text = "Pega viado"
+[node name="slide" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
+light_mask = 16
+position = Vector2(-50, 363)
+scale = Vector2(5, 4.947)
+sprite_frames = SubResource("SpriteFrames_2kxjs")
+animation = &"slide"
+autoplay = "slide"
+frame_progress = 0.155067
+speed_scale = 2.0
 
 [node name="Shootsound" type="AudioStreamPlayer" parent="."]

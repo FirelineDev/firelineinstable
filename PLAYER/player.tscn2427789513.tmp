@@ -1,0 +1,218 @@
+[gd_scene load_steps=20 format=3 uid="uid://csmgpvfd421rx"]
+
+[ext_resource type="Script" uid="uid://8yppa6llmns5" path="res://PLAYER/player.gd" id="1_6i24g"]
+[ext_resource type="Texture2D" uid="uid://bml44m2htu3pu" path="res://PLAYER/rasteira-removebg-preview.png" id="1_xmmt6"]
+[ext_resource type="Script" uid="uid://ceqcg1iuhnoxq" path="res://PLAYER/reach.gd" id="2_d1135"]
+[ext_resource type="Texture2D" uid="uid://cla2ywkqhjm27" path="res://PLAYER/chute.png" id="3_gvfuq"]
+[ext_resource type="Script" uid="uid://bj12kpaxlgxql" path="res://PLAYER/reticle.gd" id="4_bql2f"]
+[ext_resource type="PackedScene" uid="uid://c076mx5rk65wb" path="res://Script/inventory_data/inventory.tscn" id="7_yrfig"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xmmt6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmmt6"]
+atlas = ExtResource("1_xmmt6")
+region = Rect2(0, 201, 200, 199)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2kxjs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmmt6")
+}],
+"loop": true,
+"name": &"slide",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lviht"]
+atlas = ExtResource("3_gvfuq")
+region = Rect2(0, 1260, 471, 630)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tskjp"]
+atlas = ExtResource("3_gvfuq")
+region = Rect2(0, 0, 471, 630)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nugwi"]
+atlas = ExtResource("3_gvfuq")
+region = Rect2(471, 0, 471, 630)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_py76g"]
+atlas = ExtResource("3_gvfuq")
+region = Rect2(942, 0, 471, 630)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skiy3"]
+atlas = ExtResource("3_gvfuq")
+region = Rect2(0, 630, 471, 630)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0lhq"]
+atlas = ExtResource("3_gvfuq")
+region = Rect2(471, 630, 471, 630)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tb5si"]
+atlas = ExtResource("3_gvfuq")
+region = Rect2(942, 630, 471, 630)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqwsn"]
+atlas = ExtResource("3_gvfuq")
+region = Rect2(471, 1260, 471, 630)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m324a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lviht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tskjp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nugwi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_py76g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skiy3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0lhq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tb5si")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqwsn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_d1135"]
+
+[node name="CharacterBody3D2" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1_6i24g")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76512, 0)
+target_position = Vector3(0, 1, 0)
+
+[node name="head_ray_cast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80864, 0)
+target_position = Vector3(0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0083, 0)
+shape = SubResource("CapsuleShape3D_xmmt6")
+
+[node name="head" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.125252)
+
+[node name="Reach" type="RayCast3D" parent="head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00250174)
+target_position = Vector3(0, 0, -2)
+collision_mask = 8
+collide_with_areas = true
+script = ExtResource("2_d1135")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Animation" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="slide" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
+position = Vector2(202, 69.7816)
+scale = Vector2(3.92345, 2.79616)
+sprite_frames = SubResource("SpriteFrames_2kxjs")
+animation = &"slide"
+autoplay = "slide"
+frame_progress = 0.155067
+
+[node name="chute" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
+position = Vector2(78, 28)
+sprite_frames = SubResource("SpriteFrames_m324a")
+frame_progress = 0.796463
+
+[node name="reticle" type="CenterContainer" parent="CanvasLayer/Animation"]
+layout_mode = 1
+offset_left = -19.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+script = ExtResource("4_bql2f")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -6.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="PainelItem" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = SubResource("GDScript_d1135")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/PainelItem"]
+layout_mode = 0
+offset_left = 259.0
+offset_top = 275.0
+offset_right = 414.0
+offset_bottom = 330.0
+
+[node name="Label" type="Label" parent="CanvasLayer/PainelItem/Panel"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 17.0
+offset_right = 132.0
+offset_bottom = 40.0
+text = "PRESSIONE [E]"
+
+[node name="InventarioUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerInventory" parent="CanvasLayer/InventarioUI" instance=ExtResource("7_yrfig")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="Shootsound" type="AudioStreamPlayer" parent="."]
+
+[node name="hand" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.221015, 1.26918, -0.795439)
+
+[node name="pivot" type="Node3D" parent="hand"]

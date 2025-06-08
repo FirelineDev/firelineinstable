@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://ob0lyva73h75"]
+
+[ext_resource type="Script" uid="uid://v6elp5fbs2ta" path="res://Map/Assets/objetos/mangueiradrop.gd" id="1_6o6xq"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3u7xs"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i7d5w"]
+albedo_color = Color(0.384734, 0.655338, 0.943192, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sr7oo"]
+material = SubResource("StandardMaterial3D_i7d5w")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s5bnd"]
+albedo_color = Color(0.657766, 0.193934, 0.184573, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c00uk"]
+size = Vector3(1.875, 4.10443, 1.0255)
+
+[node name="Node3D" type="Node3D" groups=["items"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0347422)
+
+[node name="gun" type="RigidBody3D" parent="." groups=["items"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.13988)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="gun"]
+shape = SubResource("ConvexPolygonShape3D_3u7xs")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="gun"]
+mesh = SubResource("BoxMesh_sr7oo")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_s5bnd")
+
+[node name="Area3D" type="Area3D" parent="." groups=["items"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.13988)
+script = ExtResource("1_6o6xq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.67942, 0, 0, 0, 0.260973, 0, 0, 0, 1.15876, 0, 0, 0)
+shape = SubResource("BoxShape3D_c00uk")

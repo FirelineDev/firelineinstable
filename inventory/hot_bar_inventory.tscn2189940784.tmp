@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://by7p6nrki8tsu"]
+
+[ext_resource type="Script" uid="uid://cf4wdqefqk1jv" path="res://inventory/hot_bar_inventory.gd" id="1_ib2y8"]
+
+[node name="HotBarInventory" type="PanelContainer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -84.0
+offset_right = 298.0
+grow_vertical = 0
+script = ExtResource("1_ib2y8")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2

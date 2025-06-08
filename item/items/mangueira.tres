@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dvoafiag6tftd"]
+
+[ext_resource type="PackedScene" uid="uid://txdnqg3504ma" path="res://PLAYER/mangueira.tscn" id="1_hrqe5"]
+[ext_resource type="Script" uid="uid://b1ffg8hdt0ijv" path="res://item/item_data.gd" id="1_sb718"]
+[ext_resource type="Texture2D" uid="uid://dg1o0iwaeqr2t" path="res://item/item_atlas.tres" id="2_cecr2"]
+
+[resource]
+script = ExtResource("1_sb718")
+name = "Mangueira"
+description = "Mangueira para apagar incendio"
+stackable = false
+texture = ExtResource("2_cecr2")
+scene = ExtResource("1_hrqe5")
+metadata/_custom_type_script = "uid://b1ffg8hdt0ijv"

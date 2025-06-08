@@ -14,6 +14,7 @@ cull_mode = 2
 albedo_texture = ExtResource("1_ngtox")
 metallic_texture = ExtResource("2_gm2l3")
 metallic_texture_channel = 2
+roughness = 0.0
 roughness_texture = ExtResource("2_gm2l3")
 roughness_texture_channel = 1
 
@@ -60,6 +61,7 @@ cull_mode = 2
 albedo_texture = ExtResource("3_pc4bj")
 metallic_texture = ExtResource("4_ytdsa")
 metallic_texture_channel = 2
+roughness = 0.0
 roughness_texture = ExtResource("4_ytdsa")
 roughness_texture_channel = 1
 
@@ -106,6 +108,7 @@ cull_mode = 2
 albedo_texture = ExtResource("5_cg0pf")
 metallic_texture = ExtResource("6_2t5tx")
 metallic_texture_channel = 2
+roughness = 0.0
 roughness_texture = ExtResource("6_2t5tx")
 roughness_texture_channel = 1
 
@@ -156,6 +159,7 @@ points = PackedVector3Array(-0.000109732, 1.31787, 0.839335, -0.109415, 1.31787,
 transparency = 1
 cull_mode = 2
 albedo_texture = ExtResource("4_ngtox")
+roughness = 0.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_gm2l3"]
 

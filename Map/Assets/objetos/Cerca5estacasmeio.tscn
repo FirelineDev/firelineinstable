@@ -14,6 +14,7 @@ cull_mode = 2
 albedo_texture = ExtResource("1_rfdop")
 metallic_texture = ExtResource("2_gxiof")
 metallic_texture_channel = 2
+roughness = 0.0
 roughness_texture = ExtResource("2_gxiof")
 roughness_texture_channel = 1
 
@@ -60,6 +61,7 @@ cull_mode = 2
 albedo_texture = ExtResource("3_bcedn")
 metallic_texture = ExtResource("4_6syga")
 metallic_texture_channel = 2
+roughness = 0.0
 roughness_texture = ExtResource("4_6syga")
 roughness_texture_channel = 1
 
@@ -106,6 +108,7 @@ cull_mode = 2
 albedo_texture = ExtResource("5_qvi0x")
 metallic_texture = ExtResource("6_cxxjf")
 metallic_texture_channel = 2
+roughness = 0.0
 roughness_texture = ExtResource("6_cxxjf")
 roughness_texture_channel = 1
 
@@ -176,7 +179,6 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 5.07918, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="estacamodel1/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_wqase")
 
 [node name="estacamodel2" type="Node3D" parent="."]
@@ -206,7 +208,6 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 5.07918, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="estacamodel3/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_5nkyn")
 
 [node name="estacamodel4" type="Node3D" parent="."]
@@ -221,7 +222,6 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 5.07918, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="estacamodel4/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_snsr0")
 
 [node name="estacamodel5" type="Node3D" parent="."]
@@ -235,7 +235,6 @@ skeleton = NodePath("")
 [node name="StaticBody3D" type="StaticBody3D" parent="estacamodel5/Cilindro"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="estacamodel5/Cilindro/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_lat3n")
 
 [node name="Arame" type="MeshInstance3D" parent="."]

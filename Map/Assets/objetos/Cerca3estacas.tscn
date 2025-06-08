@@ -14,6 +14,7 @@ cull_mode = 2
 albedo_texture = ExtResource("1_ngtox")
 metallic_texture = ExtResource("2_gm2l3")
 metallic_texture_channel = 2
+roughness = 0.0
 roughness_texture = ExtResource("2_gm2l3")
 roughness_texture_channel = 1
 
@@ -60,6 +61,7 @@ cull_mode = 2
 albedo_texture = ExtResource("3_pc4bj")
 metallic_texture = ExtResource("4_ytdsa")
 metallic_texture_channel = 2
+roughness = 0.0
 roughness_texture = ExtResource("4_ytdsa")
 roughness_texture_channel = 1
 
@@ -106,6 +108,7 @@ cull_mode = 2
 albedo_texture = ExtResource("5_cg0pf")
 metallic_texture = ExtResource("6_2t5tx")
 metallic_texture_channel = 2
+roughness = 0.0
 roughness_texture = ExtResource("6_2t5tx")
 roughness_texture_channel = 1
 
@@ -170,7 +173,6 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 5.07918, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="estacamodel1/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_wqase")
 
 [node name="estacamodel2" type="Node3D" parent="."]
@@ -193,6 +195,8 @@ transform = Transform3D(0.0994319, 0, 0, 0, 0.0921455, 0, 0, 0, 0.0901754, -1.14
 
 [node name="Cilindro" type="MeshInstance3D" parent="estacamodel3"]
 transform = Transform3D(1, 0, 0, 0, 5.07918, 0, 0, 0, 1, 0, 0, 0)
+gi_mode = 2
+gi_lightmap_texel_scale = 2.902
 mesh = SubResource("ArrayMesh_ip4xx")
 skeleton = NodePath("")
 
@@ -200,7 +204,6 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 5.07918, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="estacamodel3/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_5nkyn")
 
 [node name="Arame2" type="MeshInstance3D" parent="."]
