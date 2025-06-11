@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3takxbur33ur"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4eojh"]
+albedo_color = Color(0.728975, 0.344034, 0.112829, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xrodq"]
+material = SubResource("StandardMaterial3D_4eojh")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_80m4d"]
+
+[node name="Fireball" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_xrodq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("SphereShape3D_80m4d")

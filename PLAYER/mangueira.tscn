@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://txdnqg3504ma"]
+[gd_scene load_steps=64 format=3 uid="uid://txdnqg3504ma"]
 
 [ext_resource type="Script" uid="uid://dqvfebexcwsyb" path="res://PLAYER/mangueira.gd" id="1_2aoyo"]
 [ext_resource type="Texture2D" uid="uid://b1g7ws4xhmqcj" path="res://Textura/Player/MaoItem/mao1.png" id="1_i10xq"]
@@ -391,10 +391,17 @@ spread = 24.775
 initial_velocity_min = 20.0
 initial_velocity_max = 40.0
 scale_curve = SubResource("CurveTexture_gvfuq")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_gvfuq"]
 radius = 0.2
 height = 0.4
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2aoyo"]
+height = 1.40552
+radius = 0.913086
 
 [node name="Mangueira" type="Node3D" groups=["player"]]
 script = ExtResource("1_2aoyo")
@@ -445,10 +452,16 @@ frame = 17
 frame_progress = 1.0
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1.31214, 0, 0, 0, 0.819055, -0.225688, 0, 0.0728105, 2.5388, 0.332448, -0.461879, -0.984665)
+transform = Transform3D(1.31214, 0, 0, 0, 0.819055, -0.225688, 0, 0.0728105, 2.5388, 0.353191, -0.461879, -1.0001)
 material_override = SubResource("StandardMaterial3D_6i24g")
-emitting = false
 amount = 260
 interp_to_end = 0.22
 process_material = SubResource("ParticleProcessMaterial_xmmt6")
 draw_pass_1 = SubResource("SphereMesh_gvfuq")
+
+[node name="DetectorArea" type="Area3D" parent="GPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 5.58794e-09, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GPUParticles3D/DetectorArea"]
+transform = Transform3D(-1, -8.67481e-08, 1.08404e-08, -5.32907e-15, 0.124, 0.992282, -8.74228e-08, 0.992282, -0.124, 1.35477, 0.297582, -7.5455)
+shape = SubResource("CylinderShape3D_2aoyo")
