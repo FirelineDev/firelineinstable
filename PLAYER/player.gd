@@ -82,13 +82,11 @@ var active_item_slot_data: SlotData = null
 
 
 
-# Sinal do Inventário do player
 
 
 		
 signal toggle_inventory() 
 func _ready():
-	# Captura do mouse e invisibilidade inicial
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if death_screen:
 		death_screen.visible = false
@@ -106,7 +104,6 @@ func _ready():
 		head_ray_cast.target_position = Vector3(0, HITBOX_NORMAL_HEIGHT - HITBOX_CROUCH_HEIGHT + 0.1, 0)
 		head_ray_cast.enabled = true
 
-	# Adiciona o player ao grupo
 	add_to_group("player")
 
 	
@@ -132,7 +129,6 @@ func _input(event):
 func _process(delta):
 	if dead:
 		return
-	# Câmera e trepidação/breath
 	var is_moving_horizontally = abs(velocity.x) > 0.1 or abs(velocity.z) > 0.1
 	if camera and original_camera_position:
 		if is_moving_horizontally and is_shake_enabled:
@@ -157,7 +153,6 @@ func _process(delta):
 func _physics_process(delta):
 	if dead:
 		return
-	# Controle de agachar e sprint
 	if is_crouching and not Input.is_action_pressed("crouch") and can_stand_up():
 		is_crouching = false
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forwards", "move_backwards")
@@ -166,8 +161,6 @@ func _physics_process(delta):
 	is_crouching = Input.is_action_pressed("crouch") and is_on_floor() or (is_crouching and not can_stand_up())
 	is_sprinting = Input.is_action_pressed("sprint") and not is_crouching
 	var is_moving_forward = Input.is_action_pressed("move_forwards") and not Input.is_action_pressed("move_backwards") and input_dir.x == 0
-
-	# Slide
 	if not slide_window_active and is_sprinting and is_moving_forward and is_on_floor() and not is_sliding:
 		slide_ready_timer = SLIDE_WINDOW
 		slide_window_active = true
@@ -179,16 +172,12 @@ func _physics_process(delta):
 			slide_window_active = false
 	if slide_window_active and slide_ready_timer <= 0.0:
 		slide_window_active = false
-
-	# Velocidade
 	target_speed = BASE_SPEED
 	if is_crouching and not is_sliding:
 		target_speed *= CROUCH_SPEED_MULTIPLIER
 	elif is_sprinting:
 		target_speed *= SPRINT_SPEED_MULTIPLIER
 	current_speed = lerp(current_speed, target_speed, delta * SPEED_LERP)
-
-	# Ajuste de hitbox
 	if collision_shape:
 		var shape = collision_shape.shape
 		if shape is CapsuleShape3D:
@@ -208,8 +197,6 @@ func _physics_process(delta):
 				is_crouching = true
 			if abs(shape.height - target_height) > HEIGHT_EPSILON:
 				shape.height = lerp(shape.height, target_height, delta * 10.0)
-
-	# Movimento
 	if is_sliding:
 		slide_timer -= delta
 		velocity.x = lerp(velocity.x, 0.0, delta * SLIDE_FRICTION)
@@ -225,8 +212,6 @@ func _physics_process(delta):
 		else:
 			velocity.x = lerp(velocity.x, 0.0, delta * 8.0)
 			velocity.z = lerp(velocity.z, 0.0, delta * 8.0)
-
-	# Gravidade e pulo
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -237,11 +222,9 @@ func _physics_process(delta):
 	was_on_floor = is_on_floor()
 	move_and_slide()
 	
-
 func interact() -> void:
 	if interact_ray.is_colliding():
 		interact_ray.get_collider().player_interact()
-		
 func start_slide():
 	is_sliding = true
 	slide_timer = SLIDE_DURATION
@@ -270,9 +253,6 @@ func update_hand_item_sprite(slot_data: SlotData) -> void:
 	else:
 		item_sprite.visible = false
 		current_item_slot_data = null
-
-
-
 
 func update_hand_item(slot_data: SlotData) -> void:
 	if active_item_instance and is_instance_valid(active_item_instance):

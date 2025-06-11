@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://clhj8jx1vc54s"]
+
+[ext_resource type="Texture2D" uid="uid://dlbbvukd8kg83" path="res://Textura/Fogo/Smoke30Frames_0 (1).png" id="1_iycnc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iycnc"]
+transparency = 1
+cull_mode = 2
+depth_draw_mode = 2
+albedo_color = Color(0.239216, 0.239216, 0.239216, 0.341176)
+albedo_texture = ExtResource("1_iycnc")
+emission_enabled = true
+emission_operator = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uo7uf"]
+emission_shape_scale = Vector3(0.5, 0.5, 0.5)
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 2, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_dlxia"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uo7uf"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.753984, 0.753984, 0.753984, 1)
+albedo_texture = ExtResource("1_iycnc")
+emission_enabled = true
+emission = Color(0.407691, 0.205103, 0.0431468, 1)
+emission_energy_multiplier = 8.0
+billboard_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_yy2v4"]
+offsets = PackedFloat32Array(0, 0.191489, 0.819149)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0.0470588)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_um4au"]
+gradient = SubResource("Gradient_yy2v4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dlxia"]
+emission_shape_scale = Vector3(0.2, 0.2, 0.2)
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 2, 0)
+color_ramp = SubResource("GradientTexture1D_um4au")
+
+[sub_resource type="QuadMesh" id="QuadMesh_yy2v4"]
+
+[node name="FireEffect" type="Node3D" groups=["fogo"]]
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.209399, 0, 0, 0, 0.17318, 0, 0, 0, 0.136187, 0, 0.309275, 0.00708199)
+layers = 2
+material_override = SubResource("StandardMaterial3D_iycnc")
+amount = 40
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_uo7uf")
+draw_pass_1 = SubResource("QuadMesh_dlxia")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_uo7uf")
+amount = 10
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_dlxia")
+draw_pass_1 = SubResource("QuadMesh_yy2v4")

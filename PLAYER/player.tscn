@@ -147,7 +147,7 @@ offset_bottom = 20.0
 script = ExtResource("4_bql2f")
 
 [node name="slide" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
-light_mask = 16
+clip_children = 2
 position = Vector2(-50, 363)
 scale = Vector2(5, 4.947)
 sprite_frames = SubResource("SpriteFrames_2kxjs")

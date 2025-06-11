@@ -38,7 +38,6 @@ func mover_para(target_pos: Vector3, delta: float):
 	move_and_slide()
 
 func atacar_player():
-	# Só ataca se não estiver no meio da animação
 	if not is_attacking:
 		is_attacking = true
 		velocity = Vector3.ZERO
@@ -49,7 +48,7 @@ func atacar_player():
 func _on_animation_finished():
 	if sprite.animation == "jogando" and not is_dead:
 		disparar_fireball()
-		is_attacking = false  # Libera para novo ataque
+		is_attacking = false  
 
 func recuar_do_player(delta):
 	sprite.play("recuar")

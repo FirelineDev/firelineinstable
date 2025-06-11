@@ -6,21 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://cla2ywkqhjm27" path="res://PLAYER/chute.png" id="3_gvfuq"]
 [ext_resource type="Texture2D" uid="uid://dd6hmf5ppcvnc" path="res://PLAYER/ajuste.png" id="4_bql2f"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xmmt6"]
-atlas = ExtResource("1_xmmt6")
-region = Rect2(0, 201, 200, 199)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_2kxjs"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xmmt6")
-}],
-"loop": true,
-"name": &"slide",
-"speed": 5.0
-}]
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_lviht"]
 atlas = ExtResource("3_gvfuq")
 region = Rect2(0, 1260, 471, 630)
@@ -365,6 +350,21 @@ animations = [{
 "speed": 6.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmmt6"]
+atlas = ExtResource("1_xmmt6")
+region = Rect2(0, 201, 200, 199)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2kxjs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmmt6")
+}],
+"loop": true,
+"name": &"slide",
+"speed": 5.0
+}]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6i24g"]
 transparency = 1
 albedo_color = Color(0, 0.286275, 0.658824, 0.631373)
@@ -422,15 +422,6 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="slide" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
-visible = false
-position = Vector2(-189, 64)
-scale = Vector2(3.92345, 2.80841)
-sprite_frames = SubResource("SpriteFrames_2kxjs")
-animation = &"slide"
-autoplay = "slide"
-frame_progress = 0.155067
-
 [node name="chute" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
 visible = false
 position = Vector2(78, 28)
@@ -438,6 +429,7 @@ sprite_frames = SubResource("SpriteFrames_m324a")
 frame_progress = 0.0902394
 
 [node name="idle" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
+z_index = 1
 position = Vector2(199, 137)
 scale = Vector2(0.687, 0.566667)
 sprite_frames = SubResource("SpriteFrames_i3pqv")
@@ -451,9 +443,19 @@ animation = &"ajusteup"
 frame = 17
 frame_progress = 1.0
 
+[node name="slide" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(786, 788)
+scale = Vector2(3.92345, 2.80841)
+sprite_frames = SubResource("SpriteFrames_2kxjs")
+animation = &"slide"
+autoplay = "slide"
+frame_progress = 0.155067
+
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1.31214, 0, 0, 0, 0.819055, -0.225688, 0, 0.0728105, 2.5388, 0.353191, -0.461879, -1.0001)
 material_override = SubResource("StandardMaterial3D_6i24g")
+emitting = false
 amount = 260
 interp_to_end = 0.22
 process_material = SubResource("ParticleProcessMaterial_xmmt6")

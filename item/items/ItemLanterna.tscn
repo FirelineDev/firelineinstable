@@ -7,9 +7,10 @@
 
 [node name="Lanterna" type="SpotLight3D" parent="."]
 visible = false
-spot_range = 5.479
+light_energy = 26.0
+spot_range = 29.408
 spot_angle = 32.21
-spot_angle_attenuation = 9.18957
+spot_angle_attenuation = 3.36358
 script = ExtResource("1_mwha0")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
