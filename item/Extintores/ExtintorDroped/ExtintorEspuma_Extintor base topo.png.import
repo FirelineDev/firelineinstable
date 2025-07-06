@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4un5pl3aw4ai"
-path.s3tc="res://.godot/imported/item2.webp-a1783b1d8967b7f1895f5f5d0deca309.s3tc.ctex"
+uid="uid://ccebytv35cxik"
+path.s3tc="res://.godot/imported/ExtintorEspuma_Extintor base topo.png-a7c2ae329f732803f0cd377e1421c3b7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "42e998d4c8a67fd7e06f9d8867c4ea2c"
+}
 
 [deps]
 
-source_file="res://item/item2.webp"
-dest_files=["res://.godot/imported/item2.webp-a1783b1d8967b7f1895f5f5d0deca309.s3tc.ctex"]
+source_file="res://item/Extintores/ExtintorDroped/ExtintorEspuma_Extintor base topo.png"
+dest_files=["res://.godot/imported/ExtintorEspuma_Extintor base topo.png-a7c2ae329f732803f0cd377e1421c3b7.s3tc.ctex"]
 
 [params]
 

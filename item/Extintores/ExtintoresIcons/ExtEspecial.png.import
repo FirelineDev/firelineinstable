@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4un5pl3aw4ai"
-path.s3tc="res://.godot/imported/item2.webp-a1783b1d8967b7f1895f5f5d0deca309.s3tc.ctex"
+uid="uid://cvvmts0p3r1dr"
+path.s3tc="res://.godot/imported/ExtEspecial.png-5cf74958c5700649de94cbc93099f1fd.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://item/item2.webp"
-dest_files=["res://.godot/imported/item2.webp-a1783b1d8967b7f1895f5f5d0deca309.s3tc.ctex"]
+source_file="res://item/Extintores/ExtintoresIcons/ExtEspecial.png"
+dest_files=["res://.godot/imported/ExtEspecial.png-5cf74958c5700649de94cbc93099f1fd.s3tc.ctex"]
 
 [params]
 

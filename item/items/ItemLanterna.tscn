@@ -7,7 +7,7 @@
 
 [node name="Lanterna" type="SpotLight3D" parent="."]
 visible = false
-light_energy = 26.0
+light_energy = 3.0
 spot_range = 29.408
 spot_angle = 32.21
 spot_angle_attenuation = 3.36358

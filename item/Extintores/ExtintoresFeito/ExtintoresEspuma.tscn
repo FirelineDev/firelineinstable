@@ -1,0 +1,42 @@
+[gd_scene load_steps=11 format=3 uid="uid://qv7ffiwu6e71"]
+
+[ext_resource type="Script" uid="uid://cep3w7lfvp85i" path="res://item/Extintores/ExtintoresFeito/Pick_up.gd" id="1_anwsj"]
+[ext_resource type="PackedScene" uid="uid://e0uelat06le2" path="res://item/Extintores/ExtintoresFeito/ExtintorScript/ExtintorEspuma.tscn" id="2_anwsj"]
+[ext_resource type="Script" uid="uid://b1ffg8hdt0ijv" path="res://item/item_data.gd" id="3_drkpq"]
+[ext_resource type="Texture2D" uid="uid://dxmqfjvqh5uey" path="res://item/Extintores/ExtintoresIcons/ExtEspuma.png" id="4_4iqla"]
+[ext_resource type="Script" uid="uid://bexutcnnqepfs" path="res://inventory/slot_data.gd" id="5_qhsmb"]
+[ext_resource type="PackedScene" uid="uid://bcxk512a1agdn" path="res://item/Extintores/ExtintorDroped/ExtintorEspuma.glb" id="6_v5sah"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtkta"]
+atlas = ExtResource("4_4iqla")
+
+[sub_resource type="Resource" id="Resource_hx2ou"]
+script = ExtResource("3_drkpq")
+name = "Extintor de Espuma Mecânica (AFFF)"
+description = "O extintor de espuma é indicado para incêndios das classes A e B, sendo eficaz tanto em materiais sólidos combustíveis (como papel, madeira e tecidos) quanto em líquidos inflamáveis (como gasolina e álcool). "
+stackable = false
+texture = SubResource("AtlasTexture_mtkta")
+scene = ExtResource("2_anwsj")
+metadata/_custom_type_script = "uid://b1ffg8hdt0ijv"
+
+[sub_resource type="Resource" id="Resource_pr3gs"]
+script = ExtResource("5_qhsmb")
+item_data = SubResource("Resource_hx2ou")
+quantity = 1
+metadata/_custom_type_script = "uid://bexutcnnqepfs"
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_w2cvc"]
+height = 2.74146
+
+[node name="PickUp" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 5
+gravity_scale = 3.975
+script = ExtResource("1_anwsj")
+slot_data = SubResource("Resource_pr3gs")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.37, 0, 0, 0, 0.37, 0, 0, 0, 0.37, 0, 0.526038, 0)
+shape = SubResource("CylinderShape3D_w2cvc")
+
+[node name="ExtintorEspuma" parent="." instance=ExtResource("6_v5sah")]

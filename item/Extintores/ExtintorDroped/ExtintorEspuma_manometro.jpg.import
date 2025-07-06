@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4un5pl3aw4ai"
-path.s3tc="res://.godot/imported/item2.webp-a1783b1d8967b7f1895f5f5d0deca309.s3tc.ctex"
+uid="uid://ca1q6w4lnm0sb"
+path.s3tc="res://.godot/imported/ExtintorEspuma_manometro.jpg-f23bdf382e1139aa0c82347ba23f123b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "eea017a2ca49b75d1471ecb8f1acc366"
+}
 
 [deps]
 
-source_file="res://item/item2.webp"
-dest_files=["res://.godot/imported/item2.webp-a1783b1d8967b7f1895f5f5d0deca309.s3tc.ctex"]
+source_file="res://item/Extintores/ExtintorDroped/ExtintorEspuma_manometro.jpg"
+dest_files=["res://.godot/imported/ExtintorEspuma_manometro.jpg-f23bdf382e1139aa0c82347ba23f123b.s3tc.ctex"]
 
 [params]
 

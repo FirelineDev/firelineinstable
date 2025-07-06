@@ -1,19 +1,47 @@
 extends Node3D
 
-@onready var particles: GPUParticles3D = $GPUParticles3D
-@onready var particle_material := particles.process_material as ParticleProcessMaterial
-@onready var area: Area3D = $GPUParticles3D/DetectorArea
+@onready var particles := $CPUParticles3D
+@onready var area: Area3D = $CPUParticles3D/DetectorArea
+@onready var camera = $"../Camera3D"  # ajuste o caminho da câmera aqui
 
 var spread_angle: float = 10.0
 var spread_step: float = 2.0
 var min_spread: float = 0.0
 var max_spread: float = 45.0
 
+var push_force = 100.0
+
 func _ready() -> void:
+	if not is_instance_valid(particles):
+		push_error("Nó CPUParticles3D não encontrado!")
+		return
+
+	# Garante que há um material válido no CPUParticles3D
+	if not particles.get("process_material"):
+		particles.set("process_material", ParticleProcessMaterial.new())
+
+	var mat := particles.get("process_material") as ParticleProcessMaterial
+
 	if area:
-		area.body_entered.connect(_on_body_entered)
-	else:
-		push_error("DetectorArea não encontrado!")
+		area.body_entered.connect(_on_area_body_entered)
+		area.monitoring = false  # Começa desativado
+
+func _process(delta: float) -> void:
+	if not is_instance_valid(particles) or not is_instance_valid(camera):
+		return
+
+	var mat := particles.get("process_material") as ParticleProcessMaterial
+	if not mat:
+		return
+
+	# Pega a direção da câmera (eixo -Z local da câmera é "frente")
+	var dir = -camera.global_transform.basis.z.normalized()
+
+	# Atualiza direção das partículas para seguir a câmera
+	mat.direction = dir
+
+	# Atualiza rotação do nó CPUParticles3D para alinhar com a câmera
+	particles.look_at(particles.global_transform.origin + dir, Vector3.UP)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -33,26 +61,23 @@ func start_shooting() -> void:
 	particles.emitting = true
 	if area:
 		area.monitoring = true
-		print("Mangueira ativada!")
+	print("Mangueira ativada!")
 
 func stop_shooting() -> void:
 	particles.emitting = false
 	if area:
 		area.monitoring = false
-		print("Mangueira desativada.")
+	print("Mangueira desativada.")
 
 func update_spread() -> void:
-	if particle_material:
-		particle_material.spread = spread_angle
+	var mat := particles.get("process_material") as ParticleProcessMaterial
+	if mat:
+		mat.spread = spread_angle
 		print("Spread atualizado para:", spread_angle)
 
-func _on_body_entered(body: Node) -> void:
-	print("Objeto detectado:", body)
-	if body.is_in_group("inimigo"):
-		print("Inimigo atingido!")
-		if body.has_method("die"):
-			body.die()
-		else:
-			print("O inimigo não tem o método die().")
-	else:
-		print("Objeto não é inimigo.")
+func _on_area_body_entered(body: PhysicsBody3D) -> void:
+	if body.is_in_group("movel"):
+		# Direção da câmera (jato)
+		var dir = -camera.global_transform.basis.z.normalized()
+		# Aplica impulso na direção do jato
+		body.apply_c_

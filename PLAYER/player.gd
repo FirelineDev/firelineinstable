@@ -57,7 +57,7 @@ var camera_locked = false
 var camera_enabled := true
 var active_item_instance: Node3D = null
 var active_item_slot_data: SlotData = null
-
+var last_looked_item: Node = null
 
 
 
@@ -78,6 +78,7 @@ var active_item_slot_data: SlotData = null
 @onready var hand = $Hand
 @onready var item_sprite = $Hand/ItemSpritew
 @onready var hand_node: Node3D = $head/Camera3D/Hand
+@onready var interact_ui: Control = $"../UI/Interact"
 
 
 
@@ -124,9 +125,22 @@ func _input(event):
 		camera.rotate_x(-event.relative.y * 0.005)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 
-
+	if event.is_action_pressed("interact") and last_looked_item and last_looked_item.has_method("on_player_interact"):
+		interact()
 
 func _process(delta):
+	if interact_ray.is_colliding():
+		var collider = interact_ray.get_collider()
+
+		if collider is RigidBody3D and collider.has_method("get_slot_data"):
+			if interact_ui:
+				interact_ui.visible = true
+			last_looked_item = collider
+			return
+
+	if interact_ui:
+		interact_ui.visible = false
+	last_looked_item = null
 	if dead:
 		return
 	var is_moving_horizontally = abs(velocity.x) > 0.1 or abs(velocity.z) > 0.1
@@ -223,8 +237,10 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func interact() -> void:
-	if interact_ray.is_colliding():
-		interact_ray.get_collider().player_interact()
+	if last_looked_item and last_looked_item.has_method("on_player_interact"):
+		print("Chamando on_player_interact")
+		last_looked_item.on_player_interact(self)
+
 func start_slide():
 	is_sliding = true
 	slide_timer = SLIDE_DURATION
@@ -277,6 +293,7 @@ func remove_active_item() -> void:
 	active_item_instance = null
 	active_item_slot_data = null
 
+		
 func set_inventory_data(data: InventoryData) -> void:
 	if inventory_data:
 		inventory_data.inventory_updated.disconnect(_on_inventory_updated)
@@ -284,6 +301,10 @@ func set_inventory_data(data: InventoryData) -> void:
 	inventory_data = data
 	inventory_data.inventory_updated.connect(_on_inventory_updated)
 	
+func add_to_inventory(slot_data: SlotData) -> bool:
+	if inventory_data:
+		return inventory_data.pick_up_slot_data(slot_data)
+	return false
 	
 func _on_inventory_updated() -> void:
 	if active_item_slot_data == null:
