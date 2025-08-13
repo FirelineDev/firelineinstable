@@ -34,6 +34,8 @@ const SLIDE_FORCE = 9.0
 const SLIDE_WINDOW = 1.0
 
 # === VARIÁVEIS ===
+var current_inventory_data: InventoryData
+var selected_slot_index: int = -1  
 var gravity = 200
 var dead = false
 var is_crouching = false
@@ -81,11 +83,6 @@ var last_looked_item: Node = null
 @onready var interact_ui: Control = $"../UI/Interact"
 
 
-
-
-
-
-		
 signal toggle_inventory() 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -107,7 +104,9 @@ func _ready():
 
 	add_to_group("player")
 
-	
+	if Input.is_action_just_pressed("drop"):
+		drop_current_hotbar_item(current_item_slot_data)
+
 
 
 func can_stand_up() -> bool:
@@ -115,7 +114,6 @@ func can_stand_up() -> bool:
 		head_ray_cast.force_raycast_update()
 		return not head_ray_cast.is_colliding()
 	return true
-
 func _input(event):
 	if dead or not camera_enabled:
 		return
@@ -124,6 +122,10 @@ func _input(event):
 		rotate_y(-event.relative.x * 0.005)
 		camera.rotate_x(-event.relative.y * 0.005)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+
+	if event.is_action_pressed("interact") and last_looked_item and last_looked_item.has_method("on_player_interact"):
+		interact()
+
 
 	if event.is_action_pressed("interact") and last_looked_item and last_looked_item.has_method("on_player_interact"):
 		interact()
@@ -164,6 +166,27 @@ func _process(delta):
 		
 	if Input.is_action_just_pressed("interact"):
 		interact()
+		
+func drop_current_hotbar_item(slot_data: SlotData) -> void:
+	if slot_data == null or slot_data.item_data == null:
+		return
+
+	# Remove o item do inventário
+	inventory_data.remove_slot_data(slot_data)
+
+	# Instancia o item no mundo
+	var item_scene = slot_data.item_data.scene
+	if item_scene:
+		var dropped_item = item_scene.instantiate()
+		get_tree().current_scene.add_child(dropped_item)
+		dropped_item.global_transform.origin = global_transform.origin + Vector3(0, 1, 0)
+		print("Item dropado:", dropped_item.name)
+
+	# Atualiza a mão e a hotbar
+	update_hand_item(null)
+	update_hand_item_sprite(null)
+
+
 func _physics_process(delta):
 	if dead:
 		return

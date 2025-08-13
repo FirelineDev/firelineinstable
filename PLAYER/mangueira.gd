@@ -12,6 +12,7 @@ var max_spread: float = 45.0
 var push_force = 100.0
 
 func _ready() -> void:
+	add_to_group("gun")
 	if not is_instance_valid(particles):
 		push_error("Nó CPUParticles3D não encontrado!")
 		return
@@ -25,6 +26,7 @@ func _ready() -> void:
 	if area:
 		area.body_entered.connect(_on_area_body_entered)
 		area.monitoring = false  # Começa desativado
+   
 
 func _process(delta: float) -> void:
 	if not is_instance_valid(particles) or not is_instance_valid(camera):
@@ -56,7 +58,8 @@ func _input(event: InputEvent) -> void:
 		start_shooting()
 	elif event.is_action_released("shoot"):
 		stop_shooting()
-
+	if event.is_pressed():
+		print("Input detectado:", event)
 func start_shooting() -> void:
 	particles.emitting = true
 	if area:

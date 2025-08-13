@@ -27,6 +27,13 @@ func set_inventory_data(inventory_data: InventoryData) -> void:
 	inventory_data.inventory_updated.connect(populate_hot_bar)
 	populate_hot_bar(inventory_data)
 
+func highlight_selected_slot(index: int) -> void:
+	for i in range(get_child_count()):
+		var slot = get_child(i)
+		if slot.has_method("set_highlighted"):
+			slot.set_highlighted(i == index)
+
+
 func populate_hot_bar(inventory_data: InventoryData) -> void:
 	# Remove os slots antigos
 	for child in h_box_container.get_children():
@@ -48,19 +55,37 @@ func populate_hot_bar(inventory_data: InventoryData) -> void:
 			slot.modulate = Color(1, 1, 1, 0.5)
 
 	selected_slot_index = -1  
-
-func highlight_selected_slot(new_index: int) -> void:
-	if selected_slot_index != -1:
-		var old_slot = h_box_container.get_child(selected_slot_index)
-		if old_slot:
-			old_slot.modulate = Color(1, 1, 1, 0.5)
-
-	if new_index >= 0 and new_index < h_box_container.get_child_count():
-		var new_slot = h_box_container.get_child(new_index)
-		if new_slot:
-			new_slot.modulate = Color(1, 1, 1, 1.0)
 	
-	selected_slot_index = new_index
+func drop_current_hotbar_item(slot_data: SlotData) -> void:
+	if not current_inventory_data:
+		return
+
+	if not slot_data or not slot_data.item_data:
+		print_debug("❌ Nenhum item selecionado para dropar.")
+		return
+	
+	var item_scene = slot_data.item_data.scene
+	if not item_scene:
+		print_debug("❌ Item não possui uma cena para instanciar.")
+		return
+
+	var dropped_item = item_scene.instantiate()
+
+	# Ajuste esse caminho conforme onde está a camera do seu jogador!
+	var player = get_node("../../Player")
+	var camera = player.get_node("head/Camera3D")
+	dropped_item.global_transform.origin = camera.global_transform.origin + camera.global_transform.basis.z * -1.5
+
+	if dropped_item is RigidBody3D:
+		var force = camera.global_transform.basis.z * -10.0
+		dropped_item.apply_impulse(Vector3.ZERO, force)
+
+	get_tree().current_scene.add_child(dropped_item)
+
+	# ✅ Remover do inventário e atualizar a HUD
+	current_inventory_data.remove_item(slot_data)
+	populate_hot_bar(current_inventory_data)
+	print_debug("✅ Item dropado e removido do inventário.")
 
 func use_hotbar_item(index: int) -> void:
 	if not current_inventory_data:

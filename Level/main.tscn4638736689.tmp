@@ -526,7 +526,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.851634, 1.42888, 157.001)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.900677, 1.45531, 157.687)
 
 [node name="PickUp4" parent="." instance=ExtResource("38_1qv3r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.422812, 1.56452, 156.977)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.819906, 1.50947, 158.433)
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]

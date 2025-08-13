@@ -8,21 +8,6 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xmmt6"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xmmt6"]
-atlas = ExtResource("1_xmmt6")
-region = Rect2(0, 201, 200, 199)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_2kxjs"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xmmt6")
-}],
-"loop": true,
-"name": &"slide",
-"speed": 5.0
-}]
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_lviht"]
 atlas = ExtResource("3_gvfuq")
 region = Rect2(0, 1260, 471, 630)
@@ -87,6 +72,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmmt6"]
+atlas = ExtResource("1_xmmt6")
+region = Rect2(0, 201, 200, 199)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2kxjs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmmt6")
+}],
+"loop": true,
+"name": &"slide",
+"speed": 5.0
+}]
+
 [node name="CharacterBody3D2" type="CharacterBody3D"]
 script = ExtResource("1_6i24g")
 
@@ -139,16 +139,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="slide" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
-clip_children = 2
-position = Vector2(-56, 350)
-scale = Vector2(5, 4.947)
-sprite_frames = SubResource("SpriteFrames_2kxjs")
-animation = &"slide"
-autoplay = "slide"
-frame_progress = 0.155067
-speed_scale = 2.0
-
 [node name="chute" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
 visible = false
 position = Vector2(78, 28)
@@ -162,5 +152,15 @@ offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 script = ExtResource("4_bql2f")
+
+[node name="slide" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
+clip_children = 2
+position = Vector2(-50, 363)
+scale = Vector2(5, 4.947)
+sprite_frames = SubResource("SpriteFrames_2kxjs")
+animation = &"slide"
+autoplay = "slide"
+frame_progress = 0.155067
+speed_scale = 2.0
 
 [node name="Shootsound" type="AudioStreamPlayer" parent="."]

@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://e0uelat06le2"]
+[gd_scene load_steps=9 format=3 uid="uid://e0uelat06le2"]
 
-[ext_resource type="Script" uid="uid://dqvfebexcwsyb" path="res://PLAYER/mangueira.gd" id="1_420rb"]
-[ext_resource type="Texture2D" uid="uid://b1g7ws4xhmqcj" path="res://Textura/Player/MaoItem/mao1.png" id="2_uwpcv"]
-[ext_resource type="Texture2D" uid="uid://bml44m2htu3pu" path="res://PLAYER/rasteira-removebg-preview.png" id="3_lhrdq"]
+[ext_resource type="Script" uid="uid://dqvfebexcwsyb" path="res://PLAYER/mangueira.gd" id="1_q6dsb"]
+[ext_resource type="Texture2D" uid="uid://b1g7ws4xhmqcj" path="res://Textura/Player/MaoItem/mao1.png" id="2_vj1a1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
-atlas = ExtResource("2_uwpcv")
+atlas = ExtResource("2_vj1a1")
 region = Rect2(0, 500, 2000, 1500)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i3pqv"]
@@ -16,21 +15,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xmmt6"]
-atlas = ExtResource("3_lhrdq")
-region = Rect2(0, 201, 200, 199)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_2kxjs"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xmmt6")
-}],
-"loop": true,
-"name": &"slide",
 "speed": 5.0
 }]
 
@@ -45,6 +29,8 @@ emission = Color(0, 0.0235294, 0.0901961, 1)
 clearcoat_enabled = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_420rb"]
+radius = 0.2
+height = 0.4
 
 [sub_resource type="Curve" id="Curve_420rb"]
 _limits = [-360.0, 360.0, 0.0, 1.0]
@@ -53,8 +39,8 @@ point_count = 5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_420rb"]
 
-[node name="ExtintorEspuma" type="Node3D" groups=["player"]]
-script = ExtResource("1_420rb")
+[node name="ExtintorAgua" type="Node3D" groups=["player"]]
+script = ExtResource("1_q6dsb")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -75,19 +61,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="idle" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
 z_index = 1
-position = Vector2(199, 137)
-scale = Vector2(0.687, 0.566667)
+position = Vector2(169, 39)
+scale = Vector2(0.571, 0.429334)
 sprite_frames = SubResource("SpriteFrames_i3pqv")
 animation = &"idle"
-
-[node name="slide" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(786, 788)
-scale = Vector2(3.92345, 2.80841)
-sprite_frames = SubResource("SpriteFrames_2kxjs")
-animation = &"slide"
-autoplay = "slide"
-frame_progress = 0.155067
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 transform = Transform3D(-0.000905434, -0.999237, -0.0390575, 0.0231582, -0.039068, 0.998968, -0.999731, 0, 0.0231759, 0.532124, -0.478291, -1.2585)
@@ -96,8 +73,9 @@ material_override = SubResource("StandardMaterial3D_420rb")
 cast_shadow = 0
 gi_mode = 0
 gi_lightmap_texel_scale = 0.01
-amount = 40
-lifetime = 0.3
+amount = 600
+lifetime = 2.88
+speed_scale = 5.77
 mesh = SubResource("SphereMesh_420rb")
 spread = 8.62
 gravity = Vector3(0, -1, 0)
