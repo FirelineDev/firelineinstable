@@ -2,7 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<< Updated upstream
 uid="uid://ddplo7qtjayyh"
+=======
+uid="uid://ci6pbmjks58nd"
+>>>>>>> Stashed changes
 path.s3tc="res://.godot/imported/casaemobra3_piso_vinilico_em_regua__cimento_queimado__m2_1566914057_611.jpg-c49014bc7c793f0cbcb3ecd62c721d4c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],

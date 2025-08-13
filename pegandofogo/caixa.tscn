@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4bof3586lbf8"]
+
+[ext_resource type="ArrayMesh" uid="uid://cdlwekgqfclo6" path="res://BlenderNatureAsset.obj" id="1_62x7x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4f62s"]
+
+[node name="Caixa" type="RigidBody3D" groups=["inflamavel"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0341126, 0.146296)
+mesh = ExtResource("1_62x7x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_4f62s")

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmax2u4dw3yfv"]
+
+[ext_resource type="Script" uid="uid://dp1j18s0bqra5" path="res://fire.gd" id="1_rkqi7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_udsxm"]
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_imbxe"]
+material = SubResource("StandardMaterial3D_udsxm")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n2vou"]
+size = Vector3(1.24207, 1.1084, 1)
+
+[node name="Fogo" type="Area3D"]
+script = ExtResource("1_rkqi7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_imbxe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0324646, -0.0130842, 0.00473118)
+shape = SubResource("BoxShape3D_n2vou")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

@@ -3,7 +3,11 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
+<<<<<<< Updated upstream
 uid="uid://ilqs0r0th6kf"
+=======
+uid="uid://cy5jlq7m6olvx"
+>>>>>>> Stashed changes
 path="res://.godot/imported/casaemobra2.glb-e22819343b8d4fd4cfe9a96a4b8c2956.scn"
 
 [deps]

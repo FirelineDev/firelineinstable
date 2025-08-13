@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://b7nvmbbvk4bha"
+path.s3tc="res://.godot/imported/lilac_bush_pack_12_vars_lods_game_ready_27.png-99e06710bb11d3bf9b0febebc62ca00c.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "84f2c7c1744e317d8cf2e9cbb5d5cc8c"
+}
+
+[deps]
+
+source_file="res://Map/Assets/objetos/TextureObj/lilac_bush_pack_12_vars_lods_game_ready_27.png"
+dest_files=["res://.godot/imported/lilac_bush_pack_12_vars_lods_game_ready_27.png-99e06710bb11d3bf9b0febebc62ca00c.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://Map/Assets/objetos/TextureObj/lilac_bush_pack_12_vars_lods_game_ready_27.png"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

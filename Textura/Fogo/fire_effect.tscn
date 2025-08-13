@@ -1,6 +1,13 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=10 format=3 uid="uid://clhj8jx1vc54s"]
 
 [ext_resource type="Texture2D" uid="uid://dlbbvukd8kg83" path="res://Textura/Fogo/Smoke30Frames_0 (1).png" id="1_iycnc"]
+=======
+[gd_scene load_steps=11 format=3 uid="uid://clhj8jx1vc54s"]
+
+[ext_resource type="Texture2D" uid="uid://dlbbvukd8kg83" path="res://Textura/Fogo/Smoke30Frames_0 (1).png" id="1_iycnc"]
+[ext_resource type="Script" uid="uid://djvfwc1q3mjf" path="res://Textura/Fogo/FogoIluminacao.gd" id="2_uo7uf"]
+>>>>>>> Stashed changes
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iycnc"]
 transparency = 1
@@ -63,3 +70,12 @@ amount = 10
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_dlxia")
 draw_pass_1 = SubResource("QuadMesh_yy2v4")
+<<<<<<< Updated upstream
+=======
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.747607, 0.509601, 0.298437, 1)
+light_energy = 12.604
+omni_range = 3.801
+script = ExtResource("2_uo7uf")
+>>>>>>> Stashed changes
