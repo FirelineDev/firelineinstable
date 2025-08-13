@@ -430,8 +430,8 @@ frame_progress = 0.0902394
 
 [node name="idle" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
 z_index = 1
-position = Vector2(199, 137)
-scale = Vector2(0.687, 0.566667)
+position = Vector2(-141, -363.5)
+scale = Vector2(0.883, 0.924667)
 sprite_frames = SubResource("SpriteFrames_i3pqv")
 animation = &"idle"
 
