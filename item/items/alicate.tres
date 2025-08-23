@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("1_qec4e")
-name = "Alicate"
-description = "Alicate, sla pra q tu vai usar"
+name = "Extintor Especial"
+description = ""
 stackable = true
 texture = ExtResource("2_bkfbe")
 metadata/_custom_type_script = "uid://b1ffg8hdt0ijv"

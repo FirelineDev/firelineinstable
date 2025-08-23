@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://domhm87hbhbg1"]
+[gd_scene load_steps=9 format=3 uid="uid://domhm87hbhbg1"]
 
 [ext_resource type="Script" uid="uid://dajlr3n5wjwmb" path="res://demo/src/Player.gd" id="1_nm1yx"]
 [ext_resource type="Script" uid="uid://b62ppvc03a6b1" path="res://demo/src/CameraManager.gd" id="2_loos7"]
+[ext_resource type="SpriteFrames" uid="uid://badtv14d3sxrd" path="res://PLAYER/animation/pickup.tres" id="3_sgnwv"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_smq6u"]
 
@@ -11,6 +12,9 @@ height = 1.5
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_twc2s"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_lsqiy"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ops02"]
+blend_mode = 3
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_nm1yx")
@@ -41,3 +45,14 @@ shape = SubResource("SeparationRayShape3D_twc2s")
 [node name="Body" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_lsqiy")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Pickup" type="AnimatedSprite2D" parent="CanvasLayer"]
+material = SubResource("CanvasItemMaterial_ops02")
+position = Vector2(1377, 555)
+sprite_frames = ExtResource("3_sgnwv")
+animation = &"coletar"
+autoplay = "default"
+frame = 4
+frame_progress = 1.0

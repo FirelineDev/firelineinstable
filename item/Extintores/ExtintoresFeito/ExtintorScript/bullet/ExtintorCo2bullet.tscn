@@ -1,0 +1,114 @@
+[gd_scene load_steps=12 format=3 uid="uid://bscwnawbo2ejq"]
+
+[ext_resource type="Script" uid="uid://dqvfebexcwsyb" path="res://PLAYER/mangueira.gd" id="1_811rh"]
+[ext_resource type="Texture2D" uid="uid://b1g7ws4xhmqcj" path="res://Textura/Player/MaoItem/mao1.png" id="2_5m21g"]
+[ext_resource type="Texture2D" uid="uid://bml44m2htu3pu" path="res://PLAYER/rasteira-removebg-preview.png" id="3_3aq56"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmmt6"]
+atlas = ExtResource("3_3aq56")
+region = Rect2(0, 201, 200, 199)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2kxjs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmmt6")
+}],
+"loop": true,
+"name": &"slide",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
+atlas = ExtResource("2_5m21g")
+region = Rect2(0, 500, 2000, 1500)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i3pqv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onrkg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_420rb"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(1, 1, 1, 0.0823529)
+metallic = 0.38
+metallic_specular = 0.32
+emission_enabled = true
+emission = Color(0, 0.0235294, 0.0901961, 1)
+clearcoat_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_811rh"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="Curve" id="Curve_420rb"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.289474, 40.7861), 0.0, 0.0, 0, 0, Vector2(0.593567, 94.8902), 0.0, 0.0, 0, 0, Vector2(0.646199, 360), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_420rb"]
+
+[node name="ExtintorEspuma" type="Node3D" groups=["player"]]
+script = ExtResource("1_811rh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Animation" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="slide" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
+visible = false
+position = Vector2(-154, 268)
+scale = Vector2(3.92345, 2.80841)
+sprite_frames = SubResource("SpriteFrames_2kxjs")
+animation = &"slide"
+autoplay = "slide"
+frame_progress = 0.155067
+
+[node name="idle" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
+z_index = 1
+position = Vector2(199, 137)
+scale = Vector2(0.687, 0.566667)
+sprite_frames = SubResource("SpriteFrames_i3pqv")
+animation = &"idle"
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(-0.000527313, -0.999237, -0.0394869, 0.013487, -0.039068, 1.00995, -0.582231, 0, 0.0234307, 0.444989, -0.478291, -1.02334)
+layers = 7
+material_override = SubResource("StandardMaterial3D_420rb")
+cast_shadow = 0
+gi_mode = 0
+gi_lightmap_texel_scale = 0.01
+emitting = false
+amount = 200
+lifetime = 0.52
+speed_scale = 3.5
+mesh = SubResource("SphereMesh_811rh")
+spread = 6.43
+gravity = Vector3(0, -4, 0)
+initial_velocity_max = 68.23
+angular_velocity_curve = SubResource("Curve_420rb")
+
+[node name="Area3D" type="Area3D" parent="CPUParticles3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CPUParticles3D/Area3D"]
+shape = SubResource("BoxShape3D_420rb")

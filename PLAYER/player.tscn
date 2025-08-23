@@ -1,10 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://csmgpvfd421rx"]
+[gd_scene load_steps=19 format=3 uid="uid://csmgpvfd421rx"]
 
 [ext_resource type="Script" uid="uid://8yppa6llmns5" path="res://PLAYER/player.gd" id="1_6i24g"]
 [ext_resource type="Texture2D" uid="uid://bml44m2htu3pu" path="res://PLAYER/rasteira-removebg-preview.png" id="1_xmmt6"]
-[ext_resource type="Script" uid="uid://bwbkxmeig4crf" path="res://PLAYER/aimplayer.gd" id="2_gvfuq"]
 [ext_resource type="Texture2D" uid="uid://cla2ywkqhjm27" path="res://PLAYER/chute.png" id="3_gvfuq"]
 [ext_resource type="Script" uid="uid://bj12kpaxlgxql" path="res://PLAYER/reticle.gd" id="4_bql2f"]
+[ext_resource type="SpriteFrames" uid="uid://badtv14d3sxrd" path="res://PLAYER/animation/pickup.tres" id="5_gvfuq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xmmt6"]
 
@@ -87,25 +87,27 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_d1135"]
+blend_mode = 3
+
 [node name="CharacterBody3D2" type="CharacterBody3D"]
 script = ExtResource("1_6i24g")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76512, 0)
+target_position = Vector3(0, 1, 0)
+
+[node name="head_ray_cast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80864, 0)
+target_position = Vector3(0, 1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0083, 0)
 shape = SubResource("CapsuleShape3D_xmmt6")
 
-[node name="head_ray_cast" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.999842, 0.017784, 0, -0.017784, -0.999842, 0, 1.3637, 0)
-collision_mask = 4
-
-[node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.999842, 0.017784, 0, -0.017784, -0.999842, 0, 1.3637, 0.203845)
-collision_mask = 4
-
 [node name="head" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="head"]
-unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.125252)
 
 [node name="InteractRay" type="RayCast3D" parent="head/Camera3D" groups=["player"]]
@@ -113,12 +115,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00250174)
 target_position = Vector3(0, 0, -2.5)
 collision_mask = 4
 collide_with_areas = true
-
-[node name="aimplayer" type="RayCast3D" parent="head/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, -0.0193196, -0.999813, 0, 0.999813, -0.0193196, 0, 0.000307202, 0.125252)
-target_position = Vector3(0, -9, 0)
-collision_mask = 4
-script = ExtResource("2_gvfuq")
 
 [node name="Hand" type="Node3D" parent="head/Camera3D"]
 
@@ -140,8 +136,9 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="slide" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
+visible = false
 clip_children = 2
-position = Vector2(-56, 350)
+position = Vector2(-50, 363)
 scale = Vector2(5, 4.947)
 sprite_frames = SubResource("SpriteFrames_2kxjs")
 animation = &"slide"
@@ -153,7 +150,7 @@ speed_scale = 2.0
 visible = false
 position = Vector2(78, 28)
 sprite_frames = SubResource("SpriteFrames_m324a")
-frame_progress = 0.796463
+frame_progress = 0.863749
 
 [node name="reticle" type="CenterContainer" parent="CanvasLayer/Animation"]
 layout_mode = 1
@@ -162,5 +159,14 @@ offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 script = ExtResource("4_bql2f")
+
+[node name="Pickup" type="AnimatedSprite2D" parent="CanvasLayer"]
+visible = false
+material = SubResource("CanvasItemMaterial_d1135")
+position = Vector2(1377, 555)
+sprite_frames = ExtResource("5_gvfuq")
+animation = &"coletar"
+frame = 4
+frame_progress = 1.0
 
 [node name="Shootsound" type="AudioStreamPlayer" parent="."]

@@ -400,12 +400,8 @@ radius = 0.2
 height = 0.4
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2aoyo"]
-<<<<<<< Updated upstream
 height = 1.40552
 radius = 0.913086
-=======
-radius = 0.302734
->>>>>>> Stashed changes
 
 [node name="Mangueira" type="Node3D" groups=["player"]]
 script = ExtResource("1_2aoyo")
@@ -434,8 +430,8 @@ frame_progress = 0.0902394
 
 [node name="idle" type="AnimatedSprite2D" parent="CanvasLayer/Animation"]
 z_index = 1
-position = Vector2(-141, -363.5)
-scale = Vector2(0.883, 0.924667)
+position = Vector2(199, 137)
+scale = Vector2(0.687, 0.566667)
 sprite_frames = SubResource("SpriteFrames_i3pqv")
 animation = &"idle"
 
@@ -457,11 +453,7 @@ autoplay = "slide"
 frame_progress = 0.155067
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-<<<<<<< Updated upstream
 transform = Transform3D(1.31214, 0, 0, 0, 0.819055, -0.225688, 0, 0.0728105, 2.5388, 0.353191, -0.461879, -1.0001)
-=======
-transform = Transform3D(1.31214, 0, 0, 0, 0.819055, -0.225688, 0, 0.0728105, 2.5388, 0.332448, -0.461879, -1.42142)
->>>>>>> Stashed changes
 material_override = SubResource("StandardMaterial3D_6i24g")
 emitting = false
 amount = 260
@@ -469,16 +461,9 @@ interp_to_end = 0.22
 process_material = SubResource("ParticleProcessMaterial_xmmt6")
 draw_pass_1 = SubResource("SphereMesh_gvfuq")
 
-<<<<<<< Updated upstream
 [node name="DetectorArea" type="Area3D" parent="GPUParticles3D"]
 transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 5.58794e-09, 1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GPUParticles3D/DetectorArea"]
 transform = Transform3D(-1, -8.67481e-08, 1.08404e-08, -5.32907e-15, 0.124, 0.992282, -8.74228e-08, 0.992282, -0.124, 1.35477, 0.297582, -7.5455)
-=======
-[node name="HitDetector" type="Area3D" parent="GPUParticles3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GPUParticles3D/HitDetector"]
-transform = Transform3D(1, 0, 0, 0, 0.258819, -0.965926, 0, 0.965926, 0.258819, 0, -0.108199, -0.887054)
->>>>>>> Stashed changes
 shape = SubResource("CylinderShape3D_2aoyo")

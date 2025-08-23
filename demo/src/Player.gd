@@ -1,5 +1,8 @@
 extends CharacterBody3D
 
+# Agora o Pickup está dentro do Player (não no CanvasLayer)
+@onready var pickup: AnimatedSprite2D = $Pickup
+
 @export var MOVE_SPEED: float = 50.0
 @export var JUMP_SPEED: float = 2.0
 @export var first_person: bool = false : 
@@ -38,7 +41,7 @@ func _physics_process(p_delta) -> void:
 	move_and_slide()
 
 
-# Returns the input vector relative to the camera. Forward is always the direction the camera is facing
+# Retorna o vetor de input relativo à câmera
 func get_camera_relative_input() -> Vector3:
 	var input_dir: Vector3 = Vector3.ZERO
 	if Input.is_key_pressed(KEY_A): # Left
@@ -50,9 +53,9 @@ func get_camera_relative_input() -> Vector3:
 	if Input.is_key_pressed(KEY_S): # Backward
 		input_dir += %Camera3D.global_transform.basis.z
 	if Input.is_key_pressed(KEY_E) or Input.is_key_pressed(KEY_SPACE): # Up
-		velocity.y += JUMP_SPEED + MOVE_SPEED*.016
+		velocity.y += JUMP_SPEED + MOVE_SPEED * .016
 	if Input.is_key_pressed(KEY_Q): # Down
-		velocity.y -= JUMP_SPEED + MOVE_SPEED*.016
+		velocity.y -= JUMP_SPEED + MOVE_SPEED * .016
 	if Input.is_key_pressed(KEY_KP_ADD) or Input.is_key_pressed(KEY_EQUAL):
 		MOVE_SPEED = clamp(MOVE_SPEED + .5, 5, 9999)
 	if Input.is_key_pressed(KEY_KP_SUBTRACT) or Input.is_key_pressed(KEY_MINUS):
@@ -75,7 +78,21 @@ func _input(p_event: InputEvent) -> void:
 				gravity_enabled = ! gravity_enabled
 			elif p_event.keycode == KEY_C:
 				collision_enabled = ! collision_enabled
+			elif p_event.keycode == KEY_F: # tecla F para interagir
+				interact()
 
 		# Else if up/down released
 		elif p_event.keycode in [ KEY_Q, KEY_E, KEY_SPACE ]:
 			velocity.y = 0
+
+
+# Função de interação que roda a animação do Pickup
+func interact() -> void:
+	if pickup:
+		pickup.visible = true
+		pickup.play("coletar") # animação criada no AnimatedSprite2D
+
+
+# Esconde o sprite depois que a animação terminar
+func _on_Pickup_animation_finished() -> void:
+	pickup.visible = false

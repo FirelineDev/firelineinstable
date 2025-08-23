@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dkdv5vhkbrt05"]
 
 [ext_resource type="Script" uid="uid://cep3w7lfvp85i" path="res://item/Extintores/ExtintoresFeito/Pick_up.gd" id="1_664f8"]
-[ext_resource type="PackedScene" uid="uid://txdnqg3504ma" path="res://PLAYER/mangueira.tscn" id="2_oaspm"]
+[ext_resource type="PackedScene" uid="uid://bscwnawbo2ejq" path="res://item/Extintores/ExtintoresFeito/ExtintorScript/bullet/ExtintorCo2bullet.tscn" id="2_664f8"]
 [ext_resource type="Script" uid="uid://b1ffg8hdt0ijv" path="res://item/item_data.gd" id="3_m6yxo"]
 [ext_resource type="Texture2D" uid="uid://bhxq061dviys2" path="res://item/Extintores/ExtintoresIcons/ExtCo2.png" id="4_1m7e5"]
 [ext_resource type="Script" uid="uid://bexutcnnqepfs" path="res://inventory/slot_data.gd" id="5_wyxsq"]
@@ -16,7 +16,7 @@ name = "Extintor de CO₂ (Dióxido de Carbono)"
 description = "O extintor de CO₂ é usado principalmente para apagar incêndios de classe B (líquidos inflamáveis) e classe C (equipamentos elétricos energizados). Embora possa ter alguma ação em incêndios de classe A (materiais sólidos), não é recomendado, já que não resfria suficientemente o material e o fogo pode voltar a acender."
 stackable = false
 texture = SubResource("AtlasTexture_lsoyx")
-scene = ExtResource("2_oaspm")
+scene = ExtResource("2_664f8")
 metadata/_custom_type_script = "uid://b1ffg8hdt0ijv"
 
 [sub_resource type="Resource" id="Resource_mtuld"]

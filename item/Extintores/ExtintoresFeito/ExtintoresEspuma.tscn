@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://qv7ffiwu6e71"]
 
 [ext_resource type="Script" uid="uid://cep3w7lfvp85i" path="res://item/Extintores/ExtintoresFeito/Pick_up.gd" id="1_anwsj"]
-[ext_resource type="PackedScene" uid="uid://e0uelat06le2" path="res://item/Extintores/ExtintoresFeito/ExtintorScript/bulletagua.tscn" id="2_anwsj"]
+[ext_resource type="PackedScene" uid="uid://e0uelat06le2" path="res://item/Extintores/ExtintoresFeito/ExtintorScript/bullet/ExtintorEspumabullet.tscn" id="2_anwsj"]
 [ext_resource type="Script" uid="uid://b1ffg8hdt0ijv" path="res://item/item_data.gd" id="3_drkpq"]
 [ext_resource type="Texture2D" uid="uid://dxmqfjvqh5uey" path="res://item/Extintores/ExtintoresIcons/ExtEspuma.png" id="4_4iqla"]
 [ext_resource type="Script" uid="uid://bexutcnnqepfs" path="res://inventory/slot_data.gd" id="5_qhsmb"]

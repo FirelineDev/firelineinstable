@@ -1,7 +1,5 @@
 extends CharacterBody3D
 
-
-
 # === CONFIGURÁVEIS ===
 var current_item_slot_data: SlotData = null
 const BASE_SPEED = 4.5
@@ -34,8 +32,6 @@ const SLIDE_FORCE = 9.0
 const SLIDE_WINDOW = 1.0
 
 # === VARIÁVEIS ===
-var current_inventory_data: InventoryData
-var selected_slot_index: int = -1  
 var gravity = 200
 var dead = false
 var is_crouching = false
@@ -61,9 +57,7 @@ var active_item_instance: Node3D = null
 var active_item_slot_data: SlotData = null
 var last_looked_item: Node = null
 
-
-
-# Referências de nós]
+# === Referências de nós ===
 @export var inventory_data: InventoryData
 @onready var interact_ray: RayCast3D = $head/Camera3D/InteractRay
 @onready var ray_cast_3d = $RayCast3D
@@ -81,9 +75,11 @@ var last_looked_item: Node = null
 @onready var item_sprite = $Hand/ItemSpritew
 @onready var hand_node: Node3D = $head/Camera3D/Hand
 @onready var interact_ui: Control = $"../UI/Interact"
+@onready var pickup_sprite: AnimatedSprite2D = $CanvasLayer/Pickup
 
 
 signal toggle_inventory() 
+
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if death_screen:
@@ -102,18 +98,18 @@ func _ready():
 		head_ray_cast.target_position = Vector3(0, HITBOX_NORMAL_HEIGHT - HITBOX_CROUCH_HEIGHT + 0.1, 0)
 		head_ray_cast.enabled = true
 
+	if pickup_sprite:
+		pickup_sprite.visible = false
+		pickup_sprite.animation_finished.connect(_on_Pickup_animation_finished) # <- conexão do sinal
+
 	add_to_group("player")
-
-	if Input.is_action_just_pressed("drop"):
-		drop_current_hotbar_item(current_item_slot_data)
-
-
 
 func can_stand_up() -> bool:
 	if head_ray_cast:
 		head_ray_cast.force_raycast_update()
 		return not head_ray_cast.is_colliding()
 	return true
+
 func _input(event):
 	if dead or not camera_enabled:
 		return
@@ -122,10 +118,6 @@ func _input(event):
 		rotate_y(-event.relative.x * 0.005)
 		camera.rotate_x(-event.relative.y * 0.005)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
-
-	if event.is_action_pressed("interact") and last_looked_item and last_looked_item.has_method("on_player_interact"):
-		interact()
-
 
 	if event.is_action_pressed("interact") and last_looked_item and last_looked_item.has_method("on_player_interact"):
 		interact()
@@ -166,26 +158,6 @@ func _process(delta):
 		
 	if Input.is_action_just_pressed("interact"):
 		interact()
-		
-func drop_current_hotbar_item(slot_data: SlotData) -> void:
-	if slot_data == null or slot_data.item_data == null:
-		return
-
-	# Remove o item do inventário
-	inventory_data.remove_slot_data(slot_data)
-
-	# Instancia o item no mundo
-	var item_scene = slot_data.item_data.scene
-	if item_scene:
-		var dropped_item = item_scene.instantiate()
-		get_tree().current_scene.add_child(dropped_item)
-		dropped_item.global_transform.origin = global_transform.origin + Vector3(0, 1, 0)
-		print("Item dropado:", dropped_item.name)
-
-	# Atualiza a mão e a hotbar
-	update_hand_item(null)
-	update_hand_item_sprite(null)
-
 
 func _physics_process(delta):
 	if dead:
@@ -258,12 +230,24 @@ func _physics_process(delta):
 		is_shake_enabled = abs(velocity.x) > 0.1 or abs(velocity.z) > 0.1
 	was_on_floor = is_on_floor()
 	move_and_slide()
-	
+
+# === Interação ===
 func interact() -> void:
+	# Só interage se houver um item válido na mira
 	if last_looked_item and last_looked_item.has_method("on_player_interact"):
 		print("Chamando on_player_interact")
 		last_looked_item.on_player_interact(self)
 
+		# Animação de pegar apenas se o item tiver SlotData (ou algum indicador de "pegável")
+		if pickup_sprite and last_looked_item.has_method("get_slot_data") and last_looked_item.get_slot_data() != null:
+			pickup_sprite.visible = true
+			pickup_sprite.play("coletar")
+
+func _on_Pickup_animation_finished() -> void:
+	if pickup_sprite:
+		pickup_sprite.visible = false
+
+# === Slide ===
 func start_slide():
 	is_sliding = true
 	slide_timer = SLIDE_DURATION
@@ -284,6 +268,7 @@ func start_slide():
 		await get_tree().create_timer(0.5).timeout
 		slide_sprite.visible = false
 
+# === Itens ===
 func update_hand_item_sprite(slot_data: SlotData) -> void:
 	if slot_data and slot_data.item_data:
 		item_sprite.texture = slot_data.item_data.texture
@@ -292,6 +277,36 @@ func update_hand_item_sprite(slot_data: SlotData) -> void:
 	else:
 		item_sprite.visible = false
 		current_item_slot_data = null
+		
+func drop_active_item(drop_scene: PackedScene) -> void:
+	if not active_item_slot_data:
+		print("Nenhum item para dropar.")
+		return
+	
+	var slot_data: SlotData = active_item_slot_data
+	
+	# Instancia o item no mundo
+	if drop_scene:
+		var dropped_item = drop_scene.instantiate() as Node3D
+		get_tree().current_scene.add_child(dropped_item)
+		
+		# Posiciona o item à frente do jogador
+		var forward = -transform.basis.z.normalized()
+		dropped_item.global_position = global_position + forward * 2.0
+		
+		# Se tiver método para setar slot, usa
+		if dropped_item.has_method("set_slot_data"):
+			dropped_item.set_slot_data(slot_data)
+	
+	# Remove item da mão e do inventário
+	remove_active_item()
+	if inventory_data:
+		var index = inventory_data.slot_datas.find(slot_data)
+		if index != -1:
+			inventory_data.slot_datas[index] = null
+			inventory_data.inventory_updated.emit(inventory_data)
+	
+	print("Item dropado:", slot_data.item_data.name)
 
 func update_hand_item(slot_data: SlotData) -> void:
 	if active_item_instance and is_instance_valid(active_item_instance):
@@ -307,8 +322,6 @@ func update_hand_item(slot_data: SlotData) -> void:
 	else:
 		print("Nenhum item para instanciar ou cena faltando.")
 
-			
-		
 func remove_active_item() -> void:
 	if active_item_instance and active_item_instance.is_inside_tree():
 		active_item_instance.queue_free()
@@ -316,19 +329,18 @@ func remove_active_item() -> void:
 	active_item_instance = null
 	active_item_slot_data = null
 
-		
 func set_inventory_data(data: InventoryData) -> void:
 	if inventory_data:
 		inventory_data.inventory_updated.disconnect(_on_inventory_updated)
 
 	inventory_data = data
 	inventory_data.inventory_updated.connect(_on_inventory_updated)
-	
+
 func add_to_inventory(slot_data: SlotData) -> bool:
 	if inventory_data:
 		return inventory_data.pick_up_slot_data(slot_data)
 	return false
-	
+
 func _on_inventory_updated() -> void:
 	if active_item_slot_data == null:
 		return
@@ -336,6 +348,7 @@ func _on_inventory_updated() -> void:
 	if not inventory_data.slot_datas.has(active_item_slot_data):
 		remove_active_item()
 
+# === Vida / Morte ===
 func restart():
 	get_tree().reload_current_scene()
 

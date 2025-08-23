@@ -1,0 +1,30 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://badtv14d3sxrd"]
+
+[ext_resource type="Texture2D" uid="uid://bb1sfm6t084rn" path="res://PLAYER/animation/1.png" id="1_m6ba7"]
+[ext_resource type="Texture2D" uid="uid://d23brmc7h5bob" path="res://PLAYER/animation/2.png" id="2_r1jj2"]
+[ext_resource type="Texture2D" uid="uid://wy6tww0bvtam" path="res://PLAYER/animation/3.png" id="3_qscqi"]
+[ext_resource type="Texture2D" uid="uid://rhpi3kt8k3pm" path="res://PLAYER/animation/4.png" id="4_t36bc"]
+[ext_resource type="Texture2D" uid="uid://cs0ishxt6op1x" path="res://PLAYER/animation/5.png" id="5_3rro8"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_m6ba7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_r1jj2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qscqi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_t36bc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3rro8")
+}],
+"loop": false,
+"name": &"coletar",
+"speed": 17.0
+}]

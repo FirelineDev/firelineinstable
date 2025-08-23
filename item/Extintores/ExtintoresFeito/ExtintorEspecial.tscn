@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cep3w7lfvp85i" path="res://item/Extintores/ExtintoresFeito/Pick_up.gd" id="1_pwbev"]
 [ext_resource type="Texture2D" uid="uid://bmwg5xnvnh7jo" path="res://item/Extintores/ExtintorDroped/ExtintorEspecial_CorpoBase.png" id="1_xtlgo"]
 [ext_resource type="Texture2D" uid="uid://sw31w60jwmjs" path="res://item/Extintores/ExtintorDroped/ExtintorEspecial_Extintor de Pó Químico Seco (PQS) (1).png" id="2_p00pv"]
-[ext_resource type="Resource" uid="uid://6hw1ur4lhlgq" path="res://item/items/alicate.tres" id="2_pwbev"]
+[ext_resource type="Resource" uid="uid://bs2hrwcxykhm6" path="res://item/Extintores/ExtintoresFeito/ExtintorEspecial.tres" id="2_pwbev"]
 [ext_resource type="Script" uid="uid://bexutcnnqepfs" path="res://inventory/slot_data.gd" id="3_btvq5"]
 [ext_resource type="Texture2D" uid="uid://cmfn5dp50gnfo" path="res://item/Extintores/ExtintorDroped/ExtintorEspecial_manometro.jpg" id="3_rr8xc"]
 [ext_resource type="Texture2D" uid="uid://bt2yauhfp427w" path="res://item/Extintores/ExtintorDroped/ExtintorEspecial_Extintor base topo.png" id="4_pwbev"]
